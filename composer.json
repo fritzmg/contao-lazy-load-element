@@ -1,0 +1,36 @@
+{
+	"name":"fritzmg/contao-lazy-load-element",
+	"description":"Contao extension to allow lazy loading of content elements or modules.",
+	"keywords":["contao", "lazy", "load", "content", "module", "element"],
+	"type":"contao-module",
+	"homepage":"http://www.inspiredminds.at",
+	"license":"LGPL-3.0+",
+	"authors":[
+		{
+			"name":"Fritz Michael Gschwantner",
+			"homepage":"http://www.inspiredminds.at",
+			"email":"fmg@inspiredminds.at",
+			"role":"Developer"
+		}
+	],
+	"support":{
+		"email":"fmg@inspiredminds.at",
+		"issues":"https://github.com/fritzmg/contao-lazy-load-element/issues",
+		"source":"https://github.com/fritzmg/contao-lazy-load-element",
+		"forum":"https://community.contao.org/de"
+	},
+	"require":{
+		"php":">=5.4",
+		"contao/core":"~3.5",
+		"contao-community-alliance/composer-installer":"*",
+		"richardhj/contao-simple-ajax": "~1.0",
+		"codefog/contao-haste": "~4.0"
+	},
+	"extra":{
+		"contao":{
+			"sources": {
+				"system/modules/lazy_load_element":"system/modules/lazy_load_element"
+			}
+		}
+	}
+}
