@@ -12,7 +12,7 @@
 /**
  * Front end modules
  */
-$GLOBALS['FE_MOD']['miscellaneous']['lazyload'] = 'LazyLoadElement';
+//$GLOBALS['FE_MOD']['miscellaneous']['lazyload'] = 'LazyLoadElement';
 
 /**
  * Content elements
