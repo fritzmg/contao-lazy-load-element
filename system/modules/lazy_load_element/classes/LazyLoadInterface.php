@@ -9,15 +9,17 @@
  */
 
 
-class LazyLoad extends \Hybrid
+class LazyLoadInterface
 {
-	public static function lazyLoad()
+	public static function loadElement()
 	{
-		if( !\Environment::get('isAjaxRequest') || \Input::get('action') != 'lazyLoad' )
+		// check for ajax response and action
+		if( !\Environment::get('isAjaxRequest') || \Input::get('action') != 'lazyload' )
 		{
 			return;
 		}
 
+		// get the page object
 		global $objPage;
 
 		if( !$objPage && ( $pageId = intval( \Input::get('page') ) ) )
@@ -25,47 +27,62 @@ class LazyLoad extends \Hybrid
 			$objPage = \PageModel::findWithDetails( $pageId );
 		}
 		
+		// set the language, if page object is available
 		$GLOBALS['TL_LANGUAGE'] = ( null !== $objPage ) ? $objPage->language : $GLOBALS['TL_LANGUAGE'];
 
-		$strType = \Input::get('type');
-		$intId = intval( \Input::get('id') );
+		list( $strType, $intId ) = trimsplit('::', \Input::get('element'));
 
 		$objElement = null;
 
+		// determine the type
 		if( $strType == 'mod' )
 		{
 			$objElement = \ModuleModel::findByPk( $intId );
 		}
-		elseif( $strType == 'ce' )
+		elseif( $strType == 'cte' )
 		{
 			$objElement = \ContentModel::findByPk( $intId );
-		}
-
-		if( null === $objElement )
-		{
-			return;
-		}
-
-		if( !\Controller::isVisibleElement( $objElement ) )
-		{
-			return;
-		}
-
-		$strHtml = '';
-
-		if( $objElement->lazyload_type == 'mod' )
-		{
-			$strHtml = \Controller::getFrontendModule( $objElement->lazyload_module );
-		}
-		elseif( $objElement->lazyload_type == 'ce' )
-		{
-			$strHtml = \Controller::getContentElement( $objElement->lazyload_element );
 		}
 		else
 		{
 			return;
 		}
 
+		// check if lazy load element was found
+		if( null === $objElement )
+		{
+			return;
+		}
+
+		// check if element is of type lazyload
+		if( $objElement->type != 'lazyload' )
+		{
+			return;
+		}
+
+		// check if lazy load element is visible
+		if( !\Controller::isVisibleElement( $objElement ) )
+		{
+			return;
+		}
+
+		// generate html of lazy loaded element
+		$strHtml = '';
+
+		if( $objElement->lazyload_source == 'mod' )
+		{
+			$strHtml = \Controller::getFrontendModule( $objElement->module );
+		}
+		elseif( $objElement->lazyload_source == 'cte' )
+		{
+			$strHtml = \Controller::getContentElement( $objElement->cteAlias );
+		}
+		else
+		{
+			return;
+		}
+
+		// send html to browser
 		$objResponse = new Haste\Http\Response\HtmlResponse( $strHtml );
 		$objResponse->send();
 	}

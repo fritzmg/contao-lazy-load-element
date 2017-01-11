@@ -1,0 +1,4 @@
+
+<!-- indexer::stop -->
+<div class="<?= $this->class ?>"<?= $this->cssID ?><?= $this->attributes ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>></div>
+<!-- indexer::continue -->

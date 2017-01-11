@@ -9,7 +9,4 @@
  */
 
 
-/**
- * Hooks
- */
-$GLOBALS['TL_HOOKS']['simpleAjaxFrontend'][] = array('LazyLoad','lazyLoad');
+$GLOBALS['TL_LANG']['CTE']['lazyload'] = array('Lazy Load Element','Element um ein anderes Inhaltselement oder Modul per AJAX nachzuladen.');

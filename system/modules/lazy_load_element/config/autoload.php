@@ -14,7 +14,8 @@
  */
 ClassLoader::addClasses(array
 (
-	'LazyLoad'        => 'system/modules/news_facebook/classes/LazyLoad.php'
+	'LazyLoadElement' => 'system/modules/lazy_load_element/classes/LazyLoadElement.php',
+	'LazyLoadInterface' => 'system/modules/lazy_load_element/classes/LazyLoadInterface.php'
 ));
 
 
@@ -23,6 +24,5 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'ce_lazy_load'  => 'system/modules/lazy_load_element/templates',
-	'mod_lazy_load' => 'system/modules/lazy_load_element/templates',
+	'lazyload' => 'system/modules/lazy_load_element/templates',
 ));
