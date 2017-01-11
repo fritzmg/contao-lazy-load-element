@@ -3,10 +3,15 @@
 {
 	"use strict";
 
+	var $window = $(window);
+
 	var inViewPort = function( $element )
 	{
-		// TODO
-		return true;
+		var vpTop = $window.scrollTop();
+		var vpBot = $window.scrollTop() + $window.height();
+		var elTop = $element.offset().top;
+		var elBot = $element.offset().top + $element.outerHeight();
+		return elTop <= vpBot && elBot >= vpTop;
 	}
 
 	var loadElement = function( $element, isReload )
@@ -75,7 +80,7 @@
 		});
 	});
 
-	$(window).scroll( function()
+	$window.scroll( function()
 	{
 		$('.ce_lazyload, .mod_lazyload').filter('[data-viewport="1"]').each( function()
 		{
