@@ -106,7 +106,7 @@ class LazyLoadElement extends \Hybrid
 			$this->Template->attributes = '';
 			foreach( $arrAtributes as $k => $v )
 			{
-				$this->Template->attributes .= $k.'="'.$v.'"';
+				$this->Template->attributes .= ' '.$k.'="'.$v.'"';
 			}
 
 			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/lazy_load_element/assets/lazyload.js';
