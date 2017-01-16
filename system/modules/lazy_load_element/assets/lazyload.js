@@ -44,7 +44,7 @@
 			},
 			success: function( response )
 			{
-				$element.html( response );
+				$element.html( response ).trigger( isReload ? 'lazyload-reload' : 'lazyload' );
 			},
 			complete: function()
 			{
