@@ -15,3 +15,16 @@ $('#myLazyLoadElement').on('lazyload', function(event)
 	// …
 });
 ```
+
+There is also a stylesheet included by default that shows an AJAX loader circle while the element is being loaded or reloaded. To remove it completely you can use this style:
+
+```CSS
+.ce_lazyload:before,
+.ce_lazyload:after,
+.mod_lazyload:before,
+.mod_lazyload:after {
+	display: none;
+}
+```
+
+Or simply change the styles to your liking. Have a look at the default styles in `assets/lazyload.scss`.
