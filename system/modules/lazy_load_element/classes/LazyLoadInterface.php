@@ -61,7 +61,7 @@ class LazyLoadInterface
 				{
 					foreach ($GLOBALS['TL_HOOKS']['getPageLayout'] as $callback)
 					{
-						\System::importStatic($callback[0])->{$callback[1]}($objPage, $objLayout, $this);
+						\System::importStatic($callback[0])->{$callback[1]}($objPage, $objLayout, new \PageRegular());
 					}
 				}
 
