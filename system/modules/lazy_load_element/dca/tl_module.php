@@ -8,6 +8,3 @@
  * @license   LGPL-3.0+
  * @package   lazy_load_element
  */
-
-
-$GLOBALS['TL_LANG']['CTE']['lazyload'] = array('Lazy Load Element','For lazy loading another content element or module on page load.');
