@@ -11,3 +11,4 @@
 
 
 $GLOBALS['TL_LANG']['CTE']['lazyload'] = array('Lazy Load Element','For lazy loading another content element or module on page load.');
+$GLOBALS['TL_LANG']['MOD']['lazyload'] = $GLOBALS['TL_LANG']['CTE']['lazyload'];

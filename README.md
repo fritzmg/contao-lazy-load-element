@@ -3,7 +3,7 @@ Contao Lazy Load Element
 
 Contao extension to allow lazy loading of content elements or modules.
 
-When installed, this extension provides an additional content element and module, where you can define another content element or module to be lazy loaded on page load. You also have the possibility to let the element reload periodically, once it has been loaded for the first time. And you are able to define, whether the element should only load once it is in the viewport.
+When installed, this extension provides an additional content element where you can define another content element or module to be lazy loaded on page load. You also have the possibility to let the element reload periodically, once it has been loaded for the first time. And you are able to define, whether the element should only load once it is in the viewport.
 
 To enable this functionality you must enable __jQuery__ in the page layout.
 

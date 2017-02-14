@@ -11,3 +11,4 @@
 
 
 $GLOBALS['TL_LANG']['CTE']['lazyload'] = array('Lazy Load Element','Element um ein anderes Inhaltselement oder Modul per AJAX nachzuladen.');
+$GLOBALS['TL_LANG']['MOD']['lazyload'] = $GLOBALS['TL_LANG']['CTE']['lazyload'];

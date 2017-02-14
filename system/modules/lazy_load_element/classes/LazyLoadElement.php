@@ -94,7 +94,7 @@ class LazyLoadElement extends \Hybrid
 
 		if( $this->lazyload_reload )
 		{
-			$arrAtributes['data-reload'] = intval( $this->lazyload_reload );
+			$arrAtributes['data-reload'] = intval( floatval( $this->lazyload_reload ) * 1000 );
 		}
 
 		if( $this->lazyload_viewport )

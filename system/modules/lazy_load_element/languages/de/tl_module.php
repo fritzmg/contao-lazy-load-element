@@ -12,5 +12,5 @@
 
 $GLOBALS['TL_LANG']['tl_module']['lazyload_source'] = array('Lazy Load Quelle','Auswahl ob ein Inhaltselement oder ein Modul nachgeladen werden soll.');
 $GLOBALS['TL_LANG']['tl_module']['lazyload_source_options'] = array('mod' => 'Modul', 'cte' => 'Inhaltselement');
-$GLOBALS['TL_LANG']['tl_module']['lazyload_reload'] = array('Automatisch neu laden','Angabe in Millisekunden für ein periodisches neu laden des Elementes.');
+$GLOBALS['TL_LANG']['tl_module']['lazyload_reload'] = array('Automatisch neu laden','Angabe in Sekunden für ein periodisches neu laden des Elementes.');
 $GLOBALS['TL_LANG']['tl_module']['layzyload_viewport'] = array('Nur im Viewport','Falls das Element nur innerhalb des Viewports geladen werden soll.');
