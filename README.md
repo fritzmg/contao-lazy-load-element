@@ -1,3 +1,7 @@
+[![](https://img.shields.io/maintenance/yes/2017.svg)](https://github.com/fritzmg/contao-lazy-load-element)
+[![](https://img.shields.io/packagist/v/fritzmg/contao-lazy-load-element.svg)](https://packagist.org/packages/fritzmg/contao-lazy-load-element)
+[![](https://img.shields.io/packagist/dt/fritzmg/contao-lazy-load-element.svg)](https://packagist.org/packages/fritzmg/contao-lazy-load-element)
+
 Contao Lazy Load Element
 =====================
 
