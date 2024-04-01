@@ -1,5 +1,11 @@
 <?php
 
+use Contao\BackendTemplate;
+use Contao\ContentModel;
+use Contao\FormModel;
+use Contao\Hybrid;
+use Contao\ModuleModel;
+
 /**
  * Contao Open Source CMS
  *
@@ -10,7 +16,7 @@
  */
 
 
-class LazyLoadElement extends \Hybrid
+class LazyLoadElement extends Hybrid
 {
 	/**
 	 * Key
@@ -35,12 +41,12 @@ class LazyLoadElement extends \Hybrid
 	/**
 	 * Initialize the object
 	 *
-	 * @param \ContentModel|\ModuleModel|\FormModel $objElement
+	 * @param ContentModel|ModuleModel|FormModel $objElement
 	 * @param string                                $strColumn
 	 */
 	public function __construct($objElement, $strColumn='main')
 	{
-		if( $objElement instanceof \ModuleModel )
+		if( $objElement instanceof ModuleModel )
 		{
 			$this->strTable = 'tl_module';
 		}
@@ -60,10 +66,10 @@ class LazyLoadElement extends \Hybrid
 	{
 		if (TL_MODE == 'BE')
 		{
-			/** @var \BackendTemplate|object $objTemplate */
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			/** @var BackendTemplate|object $objTemplate */
+			$objTemplate = new BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['lazyload'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['CTE']['lazyload'][0]) . ' ###';
 			$objTemplate->id = $this->id;
 
 			return $objTemplate->parse();
@@ -110,8 +116,8 @@ class LazyLoadElement extends \Hybrid
 				$this->Template->attributes .= ' '.$k.'="'.$v.'"';
 			}
 
-			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/lazy_load_element/assets/lazyload.js';
-			$GLOBALS['TL_CSS'][] = 'system/modules/lazy_load_element/assets/lazyload.css';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaolazyloadelement/lazyload.js';
+			$GLOBALS['TL_CSS'][] = 'bundles/contaolazyloadelement/lazyload.css';
 		}
 	}
 }

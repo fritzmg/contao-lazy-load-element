@@ -1,5 +1,16 @@
 <?php
 
+use Contao\ContentModel;
+use Contao\Controller;
+use Contao\Environment;
+use Contao\Input;
+use Contao\LayoutModel;
+use Contao\ModuleModel;
+use Contao\PageModel;
+use Contao\PageRegular;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Contao Open Source CMS
  *
@@ -15,7 +26,7 @@ class LazyLoadInterface
 	public static function loadElement()
 	{
 		// check for ajax response and action
-		if( !\Environment::get('isAjaxRequest') || \Input::get('action') != 'lazyload' )
+		if( !Environment::get('isAjaxRequest') || Input::get('action') != 'lazyload' )
 		{
 			return;
 		}
@@ -23,9 +34,9 @@ class LazyLoadInterface
 		// get the page object
 		global $objPage;
 
-		if( !$objPage && ( $pageId = intval( \Input::get('page') ) ) )
+		if( !$objPage && ( $pageId = intval( Input::get('page') ) ) )
 		{
-			$objPage = \PageModel::findWithDetails( $pageId );
+			$objPage = PageModel::findWithDetails( $pageId );
 		}
 
 		// check for page object
@@ -35,20 +46,20 @@ class LazyLoadInterface
 			$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 			// Get the page layout
-			$blnMobile = ($objPage->mobileLayout && \Environment::get('agent')->mobile);
+			$blnMobile = ($objPage->mobileLayout && Environment::get('agent')->mobile);
 
 			// Override the autodetected value
-			if (\Input::cookie('TL_VIEW') == 'mobile')
+			if (Input::cookie('TL_VIEW') == 'mobile')
 			{
 				$blnMobile = true;
 			}
-			elseif (\Input::cookie('TL_VIEW') == 'desktop')
+			elseif (Input::cookie('TL_VIEW') == 'desktop')
 			{
 				$blnMobile = false;
 			}
 
 			$intId = ($blnMobile && $objPage->mobileLayout) ? $objPage->mobileLayout : $objPage->layout;
-			$objLayout = \LayoutModel::findByPk($intId);
+			$objLayout = LayoutModel::findByPk($intId);
 
 			// check for layout
 			if( null !== $objLayout )
@@ -62,7 +73,7 @@ class LazyLoadInterface
 				{
 					foreach ($GLOBALS['TL_HOOKS']['getPageLayout'] as $callback)
 					{
-						\System::importStatic($callback[0])->{$callback[1]}($objPage, $objLayout, new \PageRegular());
+						System::importStatic($callback[0])->{$callback[1]}($objPage, $objLayout, new PageRegular());
 					}
 				}
 
@@ -81,7 +92,7 @@ class LazyLoadInterface
 		}
 
 		// get the type and element ID
-		list( $strType, $intId ) = trimsplit('::', \Input::get('element'));
+		list( $strType, $intId ) = trimsplit('::', Input::get('element'));
 
 		// prepare element
 		$objElement = null;
@@ -89,11 +100,11 @@ class LazyLoadInterface
 		// determine the type
 		if( $strType == 'mod' )
 		{
-			$objElement = \ModuleModel::findByPk( $intId );
+			$objElement = ModuleModel::findByPk( $intId );
 		}
 		elseif( $strType == 'cte' )
 		{
-			$objElement = \ContentModel::findByPk( $intId );
+			$objElement = ContentModel::findByPk( $intId );
 		}
 		else
 		{
@@ -113,7 +124,7 @@ class LazyLoadInterface
 		}
 
 		// check if lazy load element is visible
-		if( !\Controller::isVisibleElement( $objElement ) )
+		if( !Controller::isVisibleElement( $objElement ) )
 		{
 			return;
 		}
@@ -123,11 +134,11 @@ class LazyLoadInterface
 
 		if( $objElement->lazyload_source == 'mod' )
 		{
-			$strHtml = \Controller::getFrontendModule( $objElement->module );
+			$strHtml = Controller::getFrontendModule( $objElement->module );
 		}
 		elseif( $objElement->lazyload_source == 'cte' )
 		{
-			$strHtml = \Controller::getContentElement( $objElement->cteAlias );
+			$strHtml = Controller::getContentElement( $objElement->cteAlias );
 		}
 		else
 		{
@@ -135,7 +146,8 @@ class LazyLoadInterface
 		}
 
 		// send html to browser
-		$objResponse = new Haste\Http\Response\HtmlResponse( $strHtml );
-		$objResponse->send();
+		(new Response($strHtml))->send();
+
+		exit;
 	}
 }
