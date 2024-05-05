@@ -85,7 +85,7 @@ class LazyLoadInterface
 				$objPage->templateGroup = $objTheme->templates;
 
 				// Store the output format
-				list($strFormat, $strVariant) = explode('_', $objLayout->doctype);
+				list($strFormat, $strVariant) = array_merge([null, null], explode('_', $objLayout->doctype));
 				$objPage->outputFormat = $strFormat;
 				$objPage->outputVariant = $strVariant;
 			}
